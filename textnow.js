@@ -1,6 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
-//let cookieJar = {}; // Initialize an empty object to store cookies.
+require('dotenv').config();
+console.log(process.env);
 
 async function getPassword(){
     let config = {
@@ -12,7 +13,7 @@ async function getPassword(){
       
       return axios.request(config)
       .then((response) => {
-        //console.log(JSON.stringify(response.data));
+        //console.log("DINOPASS" + response.data)
         return response.data;
       })
       .catch((error) => {
@@ -53,6 +54,7 @@ async function authenticate(){
     headers: { 
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0', 
         'Content-Type': 'application/json', 
+        'Cookie': Object.entries(cookieJar).map(([key, value]) => `${key}=${value}`).join('; ')
     },
     data : data
     };
@@ -78,6 +80,7 @@ async function authenticate(){
     })
     .catch((error) => {
       console.log(error);
+      process.exit(0)
     });
 }
 
@@ -90,13 +93,17 @@ async function makeRequest() {
     "has_video": false,
     "contact_value": "+14803594815",
     "contact_type": 2,
-    "message": getPassword(),
+    "message": await getPassword(),
     "read": 1,
     "message_direction": 2,
     "message_type": 1,
     "new": true,
     "date": event.toISOString()
   });
+
+
+  console.log(data);
+  //return;
 
   let config = {
     method: 'post',
@@ -145,3 +152,5 @@ async function main(){
 }
 
 main();
+//await 
+//authenticate();
