@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1"
+  },
+  "name": "textnow-numbersaver",
+  "version": "1.0.0",
+  "description": "Cron script to daily send a message from your textnow number to keep it active",
+  "main": "textnow.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ron Egli <ron@r-egli.com> (github.com/smugzombie)",
+  "license": "ISC"
+}
